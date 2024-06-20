@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mascotas | Elmore</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="website icon" type="png" href="img/logo.png">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
+  </head>
+  <body style="background-image: url(img/bg.png); background-repeat: no-repeat; background-size: 100% 100%; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    
+    <nav class="navbar fixed-top" style="background-image: linear-gradient(to bottom, #0bc4d1, #077e9c);">
+      <div class="container-fluid">
+          <div class="row justify-content-between" style="margin-left: 6cm;">
+              <div class="col-auto">
+                  <a class="navbar-brand" href="index.html" style="color: white;">
+                      <img src="img/logo.png" alt="" style="width: 50px; margin-right: 10px;">
+                      Tienda Increíble
+                  </a>
+              </div>
+              <div class="col-auto">
+                <a class="navbar-brand d-flex" href="mascotas.html" style="color: white;">
+                 Mascotas
+              </a>
+              </div>
+              <div class="col-auto" style="margin-left: 200px;">
+                  <form class="d-flex rounded-pill" role="search" style="border-radius: 5cm; overflow: hidden;">
+                      <div class="position-relative">
+                          <input class="form-control me-2 rounded-pill" type="search" placeholder="Buscar en Tienda Increible" aria-label="Search" style="border-radius: 5m; width: 500px;">
+                          <button class="btn rounded-circle d-flex justify-content-center align-items-center position-absolute" type="submit" style="background-color: rgb(0, 140, 255); width: 34px; height: 34px; right: 0; top: 50%; transform: translateY(-50%); z-index: 1; margin-right: 10px;">
+                              <img src="img/buscar.svg" alt="" style="width: 20px; height: 20px;">
+                          </button>
+                      </div>
+                  </form>
+              </div>
+              <div class="col-auto d-flex" style="margin: auto;">
+                <li class="nav-item d-flex" style="margin-left: 200px;">
+                  <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <span>
+                      <img src="img/user.svg" alt="" style="width: 25px;">
+                    </span>
+                  </button>
+                </li>
+                <li class="nav-item d-flex">
+                  <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Toggle navigation" style="margin-left: 10px;">
+                    <span>
+                      <img src="img/shopping-cart.svg" alt="" style="width: 25px;">
+                    </span>
+                  </button>
+                </li>
+              </div>
+            </div>
+          </div>
+      </div>
+    </nav> 
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="background-color: #0f62ce;">
+      <div class="offcanvas-header" style="color: white;">
+          <h5 class="offcanvas-title" id="offcanvasRightLabel" style="margin-top: 10px;">Carro <span id="cantidadCarro">(0)</span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body" id="offcanvasBody" style="color: white;">
+          <hr>
+          <div id="mensajeCarrito" style="display: none;">
+            <div class="container d-flex justify-content-center align-items-center" style="margin-top: 2cm;">
+                <img src="img/carrito.png" alt="">
+            </div>
+            <p style="font-weight: bold; margin-top: 5px; text-align: center;">Agrega algo a tu carrito</p>
+            <p style="font-size: 15px; text-align: center;">Llévate algo o iremos por ti</p>
+            <div class="container text-center" style="margin-top: 2px;">
+                <button type="button" class="btn rounded-pill btn-outline-light" data-bs-dismiss="offcanvas" aria-label="Close" style="background-color: #03a3ff; font-weight: bold; color: white; margin-top: 5px;">
+                    Buscar
+                </button>
+            </div>
+          </div>
+          <div id="listaProductos"></div>
+          <div id="totalPrecio" style="text-align: center; font-weight: bold; margin-top: 10px;">Total: $0</div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: #29529e;">
+          <div class="modal-header" style="color: white;">
+            <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="registroForm" class="d-flex was-validated" novalidate style="overflow: hidden; display: block;">
+              <div class="position-relative has-validation">
+                  <input id="usuario" name="usuario" class="form-control me-2 rounded-pill" type="text" placeholder="Usuario" required="" style="border-radius: 5m; width: 450px;"><br><hr>
+                  <input id="contraseña" name="contraseña" class="form-control me-2 rounded-pill" type="password" placeholder="Contraseña" required="" style="border-radius: 5m; width: 450px;"><br><hr>
+                  <input id="verificarcontra" name="verificarcontra" class="form-control me-2 rounded-pill" type="password" placeholder="Verificar contraseña" required style="border-radius: 5m; width: 450px;"><br>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-outline-light">Registrarse</button>
+                  </div>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid d-flex justify-content-center" style="max-width: 700px;">
+        <div class="card text-bg-light border-primary align-items-center border-light" style="max-width: 600px; margin: auto; margin-top: 200px;">
+            <div class="row g-0">
+        <div class="col-md-4 justify-content-center align-items-center d-flex">
+          <img src="img/tortuga.png" class="img-fluid rounded-3" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">Tortuga Tierna</h5>
+            <p class="card-text">Esta tortuga es lo mejor que te puede pasar en tu vida, a pesar de su apariencia, es muy amigable y una gran compañia. </p>
+          </div>
+        </div>
+            </div>
+    </div>
+    </div>
+
+    <div class="container-fluid d-flex justify-content-center" style="max-width: 700px;">
+        <div class="card text-bg-light border-primary align-items-center border-light" style="max-width: 600px; margin: auto; margin-top: 20px;">
+            <div class="row g-0">
+        <div class="col-md-12">
+          <div class="card-body">
+            <p class="card-text">Nombre: Randy</p>
+            <p class="card-text">Edad: 300.000 años</p>
+            <p class="card-text">sexo: hermafrodita</p>
+            <p class="card-text">Tamaño: microscopico</p>
+            <p class="card-text">Peso: 10 gm</p>
+            <p class="card-text">Nivel de energia: Más de 9.000</p>
+          </div>
+        </div>
+            </div>
+    </div>
+    </div>
+
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="color: white; margin-top: 10px;">
+      <button class="btn btn-outline-light rounded-3" onclick="agregarAlCarrito('Tortuga Tierna', 19990)"type="button">
+        Agregar al carrito
+      </button>
+
+    </div>
+
+    <div class="container-fluid mt-5 d-flex justify-content-center">
+      <div class="row g-4">
+        <div class="col-3">
+          <div class="card text-bg-light" style="width: 18rem;">
+            <img src="img/producto1.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Alimento para peces</h5>
+              <p class="card-text">El Alimento para Peces Dorados "Goldfish Flakes" marca Tetra es un alimento en escamas con fórmula BioActive para peces dorados y otros peces de agua fría.</p>
+              <a href="#" onclick="agregarAlCarrito('Alimento para peces', 3990)" class="btn btn-primary">Agregar al carro</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card text-bg-light" style="width: 18rem;">
+            <img src="img/comidita.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Alimento para tortugas</h5>
+              <p class="card-text">PRODAC TARTAFOOD 120g Premium Materia prima para piensos especialmente estudiada para alimentación de tortugas de agua dulce</p>
+              <a href="#" onclick="agregarAlCarrito('Alimento para tortugas', 4990)" class="btn btn-primary">Agregar al carro</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card text-bg-light" style="width: 18rem;">
+            <img src="img/producto2.webp" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Dispensador de comida</h5>
+              <p class="card-text">Alimentador de calidad de 14 onzas: fabricado con calidad, el tamaño del recipiente es de 14 onzas, puede cargar días de comida para tus mascotas de acuario, con alimentación automática.</p>
+              <a href="#" onclick="agregarAlCarrito('Dispensador de comida', 9990)" class="btn btn-primary">Agregar al carro</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card text-bg-light" style="width: 18rem;">
+            <img src="img/producto3.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Casa para pecera</h5>
+              <p class="card-text">Productos para peceras inspirados en la serie bob esponja</p>
+              <a href="#" onclick="agregarAlCarrito('Casa para pecera', 6690)" class="btn btn-primary">Agregar al carro</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="container-fluid mt-5 d-flex justify-content-center">
+      <div class="row g-4">
+        <div class="col-3">
+          <div class="card text-bg-light" style="width: 18rem;">
+            <img src="img/producto4.webp" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Desinfectante-prevencion de enfermedades</h5>
+              <p class="card-text">Para la desinfección completa del acuario contra el crecimiento de bacterias y hongos en las paredes y adornos de su acuario.</p>
+              <a href="#" onclick="agregarAlCarrito('Desinfectante-prevencion de enfermedades', 12990)" class="btn btn-primary">Agregar al carro</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card text-bg-light" style="width: 18rem;">
+            <img src="img/producto5.webp" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Acondicionador-Anticloro Fritz</h5>
+              <p class="card-text">Fritz Complete es un verdadero acondicionador de agua todo en uno y controla el ciclo del nitrógeno.</p>
+              <a href="#" onclick="agregarAlCarrito('Acondicionador-Anticloro Fritz', 7990)" class="btn btn-primary">Agregar al carro</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card text-bg-light" style="width: 18rem;">
+            <img src="img/producto6.webp" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Termocalefactor Aquael Platinium 50w</h5>
+              <p class="card-text">un innovador termocalefactor de vidrio de la empresa AQUAEL equipado con un preciso termostato electrónico.</p>
+              <a href="#" onclick="agregarAlCarrito('Termocalefactor Aquael Platinium 50w', 17990)" class="btn btn-primary">Agregar al carro</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card text-bg-light" style="width: 18rem;">
+            <img src="img/producto7.webp" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Caja roca base - Nature ocean</h5>
+              <p class="card-text">Roca base premium para acuarios marinos, de ciclidos africanos y otros peces de aguas duras.</p>
+              <a href="#" onclick="agregarAlCarrito('Caja roca base - Nature ocean', 4500)" class="btn btn-primary">Agregar al carro</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="pie-pagina">
+      <div class="grupo-1">
+          <div class="box">
+              <figure>
+                  <a href="#">
+                      <img src="img/logo.png" alt="Logo de Tienda Increible" style="width: auto;">
+                  </a>
+              </figure>
+          </div>
+          <div class="box">
+              <h2>SOBRE NOSOTROS</h2>
+              <p>Nuestro objetivo es hacer que las mascotas más especiales sean bien cuidadas.</p>
+              <p>Con nuestros productos podrás cuidar de manera más eficiente a tu mascota que tanto amas.</p>
+          </div>
+          <div class="box">
+              <h2>SIGUENOS</h2>
+              <div class="red-social">
+                  <a href="#" class="fa fa-facebook"></a>
+                  <a href="#" class="fa fa-instagram"></a>
+                  <a href="#" class="fa fa-twitter"></a>
+                  <a href="#" class="fa fa-youtube"></a>
+              </div>
+          </div>
+      </div>
+      <div class="grupo-2">
+          <small>&copy; 2024 <b>Tienda Increible</b> - Todos los Derechos Reservados.</small>
+      </div>
+  </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
