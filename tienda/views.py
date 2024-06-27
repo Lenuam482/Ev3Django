@@ -1,22 +1,27 @@
 from django.shortcuts import render
-
+from .models import Usuario
 # Create your views here.
 def index(request):
-    context={}
+    usuario = Usuario.objects.all()
+    context={"usuario": usuario}
     return render(request,'tienda/index.html',context)
 
 def darwin(request):
-    context={}
+    usuario = Usuario.objects.all()
+    context={"usuario": usuario}
     return render(request,'tienda/darwin.html',context)
 
 def mascotas(request):
-    context={}
+    usuario = Usuario.objects.all()
+    context={"usuario": usuario}
     return render(request,'tienda/mascotas.html',context)
 
 def tortuga(request):
-    context={}
+    usuario = Usuario.objects.all()
+    context={"usuario": usuario}
     return render(request,'tienda/tortuga.html',context)
 
 def mapa(request):
-    context={}
+    usuario = Usuario.objects.all()
+    context={"usuario": usuario}
     return render(request,'tienda/mapa.html',context)
