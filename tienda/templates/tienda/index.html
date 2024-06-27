@@ -155,11 +155,12 @@
     <div class="row g-4">
       <div class="col-3">
         <div class="card text-bg-light" style="width: 18rem;">
-          <img src="img/producto1.jpeg" class="card-img-top" alt="...">
+          <img src="{{ productos.imagen.url }}" alt="{{ productos.nombre }}" class="card-img-top producto-imagen">
           <div class="card-body">
-            <h5 class="card-title">Alimento para peces</h5>
-            <p class="card-text">El Alimento para Peces Dorados "Goldfish Flakes" marca Tetra es un alimento en escamas con fórmula BioActive para peces dorados y otros peces de agua fría.</p>
-            <a href="#" onclick="agregarAlCarrito('Alimento para peces', 3990)" class="btn btn-primary">Agregar al carro</a>
+              <h5 class="card-title">{{ productos.nombre }}</h5>
+              <p class="card-text">{{ productos.descripcion }}</p>
+              <p class="card-text">Precio: {{ productos.precio }}</p>
+              <a href="#" class="btn btn-primary">Agregar al carrito</a>
           </div>
         </div>
       </div>
