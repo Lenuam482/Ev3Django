@@ -4,7 +4,7 @@ from .models import Usuario
 def index(request):
     usuario = Usuario.objects.all()
     context={"usuario": usuario}
-    productos = Productos.objects.all()
+    productos = Producto.objects.all()
     return render(request,'tienda/index.html',context, {'productos': productos})
 
 def darwin(request):
