@@ -13,13 +13,13 @@
     <script src="{% static 'js/script.js' %}"></script>
   </head>
   </style>
-  <body style="background-image: url(img/bg.png); background-repeat: no-repeat;  background-size: 100% 100%; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+  <body>
     
     <nav class="navbar fixed-top" style="background-image: linear-gradient(to bottom, #0bc4d1, #077e9c);">
       <div class="container-fluid">
           <div class="row justify-content-between" style="margin-left: 6cm;">
               <div class="col-auto">
-                  <a class="navbar-brand" href="#" style="color: white;">
+                  <a class="navbar-brand" href="{% url 'index' %}" style="color: white;">
                       <img src="{% static 'img/logo.png' %}" alt="" style="width: 50px; margin-right: 10px;">
                       Tienda Increíble
                   </a>
@@ -131,7 +131,7 @@
     <div class="card-group mt-5">
       <div class="card text-bg-light align-items-center border-light">
         <a href="{% url 'mascotas' %}">
-          <img src="img/mascotas.png" class="card-img-top" alt="..." style="width: 200px;">
+          <img src="{% static 'img/mascotas.png' %}" class="card-img-top" alt="..." style="width: 200px;">
         </a>
         <div class="card-body">
           <h5 class="card-title">Nuestras Mascotas</h5>
