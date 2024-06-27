@@ -71,10 +71,3 @@
         padding: 35px 0px;
     }
 }
-
-body{
-    background-image: url('/static/img/bg.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
