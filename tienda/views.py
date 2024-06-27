@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Usuario
+from .models import Usuario, Producto
 # Create your views here.
 def index(request):
     usuario = Usuario.objects.all()
