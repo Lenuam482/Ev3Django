@@ -43,7 +43,7 @@
                 <li class="nav-item d-flex">
                   <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Toggle navigation" style="margin-left: 10px;">
                     <span>
-                      <img src="img/shopping-cart.svg" alt="" style="width: 25px;">
+                      <img src="{% static 'img/shopping-cart.svg' %}" alt="" style="width: 25px;">
                     </span>
                   </button>
                 </li>
@@ -61,7 +61,7 @@
       <div class="offcanvas-body" style="color: white;">
           <hr>
           <div class="container d-flex justify-content-center align-items-center" style="margin-top: 2cm;">
-              <img src="img/carrito.png" alt="">
+              <img src="{% static 'img/carrito.png' %}" alt="">
           </div>
           <p style="font-weight: bold; margin-top: 5px; text-align: center;">Agrega algo a tu carrito</p>
           <p style="font-size: 15px; text-align: center;">Llévate algo o iremos por ti</p>
@@ -103,7 +103,7 @@
     <div class="card text-bg-light align-items-center border-light" style="max-width: 540px; margin: auto; margin-top: 200px;">
       <div class="row g-0">
         <div class="col-md-4 justify-content-center align-items-center d-flex">
-          <a href="darwin.html">
+          <a href="{% urls 'darwin' %}">
             <img src="img/darwin.png" class="img-fluid rounded-3" alt="...">
           </a>
         </div>
@@ -121,7 +121,7 @@
     <div class="card text-bg-light align-items-center border-light" style="max-width: 540px; margin: auto; margin-top: 200px;">
       <div class="row g-0">
         <div class="col-md-4 justify-content-center align-items-center d-flex">
-          <a href="tortuga.html">
+          <a href="{% urls 'tortuga' %}">
             <img src="img/tortuga.png" class="img-fluid rounded-3" alt="...">
           </a>
         </div>
@@ -139,7 +139,7 @@
         <div class="box">
             <figure>
                 <a href="#">
-                    <img src="img/logo.png" alt="Logo de Tienda Increible" style="width: auto;">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo de Tienda Increible" style="width: auto;">
                 </a>
             </figure>
         </div>

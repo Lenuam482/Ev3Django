@@ -23,7 +23,7 @@
                   </a>
               </div>
               <div class="col-auto">
-                <a class="navbar-brand d-flex" href="mascotas.html" style="color: white;">
+                <a class="navbar-brand d-flex" href="{% urls 'mascotas' %}" style="color: white;">
                  Mascotas
               </a>
               </div>
@@ -32,7 +32,7 @@
                       <div class="position-relative">
                           <input class="form-control me-2 rounded-pill" type="search" placeholder="Buscar en Tienda Increible" aria-label="Search" style="border-radius: 5m; width: 500px;">
                           <button class="btn rounded-circle d-flex justify-content-center align-items-center position-absolute" type="submit" style="background-color: rgb(0, 140, 255); width: 34px; height: 34px; right: 0; top: 50%; transform: translateY(-50%); z-index: 1; margin-right: 10px;">
-                              <img src="img/buscar.svg" alt="" style="width: 20px; height: 20px;">
+                              <img src="{% static 'img/buscar.svg' %}" alt="" style="width: 20px; height: 20px;">
                           </button>
                       </div>
                   </form>
@@ -48,7 +48,7 @@
                 <li class="nav-item d-flex">
                   <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Toggle navigation" style="margin-left: 10px;">
                     <span>
-                      <img src="img/shopping-cart.svg" alt="" style="width: 25px;">
+                      <img src="{% static 'img/shopping-cart.svg' %}" alt="" style="width: 25px;">
                     </span>
                   </button>
                 </li>
@@ -67,7 +67,7 @@
           <hr>
           <div id="mensajeCarrito" style="display: none;">
             <div class="container d-flex justify-content-center align-items-center" style="margin-top: 2cm;">
-                <img src="img/carrito.png" alt="">
+                <img src="{% static 'img/carrito.png' %}" alt="">
             </div>
             <p style="font-weight: bold; margin-top: 5px; text-align: center;">Agrega algo a tu carrito</p>
             <p style="font-size: 15px; text-align: center;">Llévate algo o iremos por ti</p>
