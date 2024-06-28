@@ -4,8 +4,9 @@ from .models import Usuario, Producto
 def index(request):
     usuario = Usuario.objects.all()
     productos = Producto.objects.all()
-    context={"usuario": usuario}   
-    return render(request,'tienda/index.html',context, {'productos': productos})
+    context={"usuario": usuario,
+             "productos": productos}   
+    return render(request,'tienda/index.html',context)
 
 def darwin(request):
     usuario = Usuario.objects.all()
