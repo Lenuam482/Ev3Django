@@ -153,18 +153,23 @@
 
   <div class="container-fluid mt-5 d-flex justify-content-center">
     <div class="row g-4">
+      {% if productos %}
+      {% for x in productos%}
       <div class="col-3">
         <div class="card text-bg-light" style="width: 18rem;">
-          <img src="{{ productos.imagen.url }}" alt="{{ productos.nombre }}" class="card-img-top productos-imagen">
+          <img src="{{ x.imagen.url }}" alt="{{ x.nombre }}" class="card-img-top productos-imagen">
           <div class="card-body">
-              <h5 class="card-title">{{ productos.nombre }}</h5>
-              <p class="card-text">{{ productos.descripcion }}</p>
-              <p class="card-text">Precio: {{ productos.precio }}</p>
+              <h5 class="card-title">{{ x.nombre }}</h5>
+              <p class="card-text">{{ x.descripcion }}</p>
+              <p class="card-text">Precio: {{ x.precio }}</p>
               <a href="#" class="btn btn-primary">Agregar al carrito</a>
           </div>
         </div>
       </div>
-      <div class="col-3">
+      {% endfor %}
+      {% endif %}
+
+      <!-- <div class="col-3">
         <div class="card text-bg-light" style="width: 18rem;">
           <img src="img/comidita.png" class="card-img-top" alt="...">
           <div class="card-body">
@@ -173,8 +178,9 @@
             <a href="#" onclick="agregarAlCarrito('Alimento para tortugas', 4990)" class="btn btn-primary">Agregar al carro</a>
           </div>
         </div>
-      </div>
-      <div class="col-3">
+      </div> -->
+
+      <!-- <div class="col-3">
         <div class="card text-bg-light" style="width: 18rem;">
           <img src="img/producto2.webp" class="card-img-top" alt="...">
           <div class="card-body">
@@ -183,8 +189,9 @@
             <a href="#" onclick="agregarAlCarrito('Dispensador de comida', 9990)" class="btn btn-primary">Agregar al carro</a>
           </div>
         </div>
-      </div>
-      <div class="col-3">
+      </div> -->
+
+      <!-- <div class="col-3">
         <div class="card text-bg-light" style="width: 18rem;">
           <img src="img/producto3.jpg" class="card-img-top" alt="...">
           <div class="card-body">
@@ -193,12 +200,13 @@
             <a href="#" onclick="agregarAlCarrito('Casa para pecera', 6690)" class="btn btn-primary">Agregar al carro</a>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 
-  <div class="container-fluid mt-5 d-flex justify-content-center">
+  <!-- <div class="container-fluid mt-5 d-flex justify-content-center">
     <div class="row g-4">
+
       <div class="col-3">
         <div class="card text-bg-light" style="width: 18rem;">
           <img src="img/producto4.webp" class="card-img-top" alt="...">
@@ -208,8 +216,9 @@
             <a href="#" onclick="agregarAlCarrito('Desinfectante-prevencion de enfermedades', 12990)" class="btn btn-primary">Agregar al carro</a>
           </div>
         </div>
-      </div>
-      <div class="col-3">
+      </div> 
+
+       <div class="col-3">
         <div class="card text-bg-light" style="width: 18rem;">
           <img src="img/producto5.webp" class="card-img-top" alt="...">
           <div class="card-body">
@@ -218,8 +227,9 @@
             <a href="#" onclick="agregarAlCarrito('Acondicionador-Anticloro Fritz', 7990)" class="btn btn-primary">Agregar al carro</a>
           </div>
         </div>
-      </div>
-      <div class="col-3">
+      </div> 
+
+       <div class="col-3">
         <div class="card text-bg-light" style="width: 18rem;">
           <img src="img/producto6.webp" class="card-img-top" alt="...">
           <div class="card-body">
@@ -228,7 +238,8 @@
             <a href="#" onclick="agregarAlCarrito('Termocalefactor Aquael Platinium 50w', 17990)" class="btn btn-primary">Agregar al carro</a>
           </div>
         </div>
-      </div>
+      </div> 
+
       <div class="col-3">
         <div class="card text-bg-light" style="width: 18rem;">
           <img src="img/producto7.webp" class="card-img-top" alt="...">
@@ -238,9 +249,10 @@
             <a href="#" onclick="agregarAlCarrito('Caja roca base - Nature ocean', 4500)" class="btn btn-primary">Agregar al carro</a>
           </div>
         </div>
-      </div>
+      </div> 
+
     </div>
-  </div>
+  </div> -->
   <footer class="pie-pagina">
     <div class="grupo-1">
         <div class="box">
