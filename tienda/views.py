@@ -3,8 +3,8 @@ from .models import Usuario, Producto
 # Create your views here.
 def index(request):
     usuario = Usuario.objects.all()
-    context={"usuario": usuario}
     productos = Producto.objects.all()
+    context={"usuario": usuario}   
     return render(request,'tienda/index.html',context, {'productos': productos})
 
 def darwin(request):
