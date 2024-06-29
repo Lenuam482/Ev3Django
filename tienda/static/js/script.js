@@ -34,8 +34,7 @@ var cantidad = 0;
 var totalPrecio = 0;
 
 function agregarAlCarrito(nombre, precio) {
-
-    cantidad = cantidad + 1;
+    cantidad += 1;
 
     document.getElementById("cantidadCarro").innerText = "(" + cantidad + ")";
 
@@ -45,15 +44,13 @@ function agregarAlCarrito(nombre, precio) {
         <div class="d-flex justify-content-between align-items-center">
             <p>${nombre} - $${precio.toFixed(0)} CLP</p>
         </div>
-    `;  
+    `;
 
     var contenedorProductos = document.getElementById('listaProductos');
     contenedorProductos.appendChild(nuevoProducto);
 
-    totalPrecio = totalPrecio + precio;
-
+    totalPrecio += precio;
     actualizarTotalPrecio();
-
     mostrarOcultarMensajeCarrito();
 
     var offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasRight'));
@@ -61,8 +58,7 @@ function agregarAlCarrito(nombre, precio) {
 }
 
 function actualizarTotalPrecio() {
-
-    document.getElementById("totalPrecio").innerText = "$" + totalPrecio.toFixed(0) + " CLP";
+    document.getElementById("totalPrecio").innerText = "Total: $" + totalPrecio.toFixed(0) + " CLP";
 }
 
 function mostrarOcultarMensajeCarrito() {
