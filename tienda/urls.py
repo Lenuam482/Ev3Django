@@ -7,6 +7,6 @@ urlpatterns = [
     path('tortuga', views.tortuga,name='tortuga'),
     path('mapa', views.mapa,name='mapa'),
     path('mascotas', views.mascotas,name='mascotas'),
-    path('agregar_al_carrito/<str:producto_id>/', agregar_al_carrito, name='agregar_al_carrito'),
+    path('agregar_al_carrito/<str:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
 
 ]

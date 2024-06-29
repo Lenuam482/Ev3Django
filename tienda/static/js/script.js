@@ -40,7 +40,12 @@ function agregarAlCarrito(nombre, precio) {
     document.getElementById("cantidadCarro").innerText = "(" + cantidad + ")";
 
     var nuevoProducto = document.createElement('div');
-    nuevoProducto.innerHTML = '<p>' + nombre + ' - $' + precio + " CLP" + '</p>';
+    nuevoProducto.classList.add('producto-en-carrito');
+    nuevoProducto.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center">
+            <p>${nombre} - $${precio.toFixed(0)} CLP</p>
+        </div>
+    `;  
 
     var contenedorProductos = document.getElementById('listaProductos');
     contenedorProductos.appendChild(nuevoProducto);
