@@ -164,7 +164,7 @@
               <p class="card-text">Precio: {{ x.precio }}</p>
               <form method="post" action="{% url 'agregar_al_carrito' x.codigo %}">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+                <button onclick="agregarAlCarrito('{{ x.nombre }}', '{{ x.precio }}')" type="submit" class="btn btn-primary">Agregar al carrito</button>
             </form>
           </div>
         </div>
