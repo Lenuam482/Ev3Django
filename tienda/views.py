@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Usuario, Producto, Carrito, CarritoProducto
+from django.http import HttpResponse
 # Create your views here.
 def index(request):
     usuario = Usuario.objects.all()
@@ -45,3 +46,19 @@ def mapa(request):
              "productos": productos,
              "carrito" : carrito}
     return render(request,'tienda/mapa.html',context)
+
+def agregar_al_carrito(request, producto_id):
+    producto = get_object_or_404(Producto, codigo=producto_id)
+    
+    carrito = request.session.get('Carrito', {})
+    if producto_id in carrito:
+        carrito[producto_id]['cantidad'] += 1
+    else:
+        carrito[producto_id] = {
+            'nombre': producto.nombre,
+            'precio': producto.precio,
+            'cantidad': 1
+        }
+    
+    request.session['carrito'] = carrito
+    return redirect('index')
