@@ -70,6 +70,9 @@
             {% for x in carro %}
               <p style="display: block;">{{x.nombre}} - $ {{x.precio}} CLP (Cantidad: {{x.cantidad}})</p>
             {% endfor %}
+            <a href="{% url 'compra' %}" type="button" class="btn rounded-pill btn-outline-light" style="background-color: #03a3ff; font-weight: bold; color: white; margin-top: 5px;">
+              Comprar
+          </a>
           {% else %}
             <div id="mensajeCarrito" style="display: none;">
               <div class="container d-flex justify-content-center align-items-center" style="margin-top: 2cm;">
