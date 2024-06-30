@@ -63,18 +63,22 @@ def agregar_al_carro(request):
     nombre = request.POST['nombre']
     precio = request.POST['precio']
     
-    # Busca si el producto ya está en el carro
     producto_en_carro, created = Carro.objects.get_or_create(
         nombre=nombre,
         defaults={'precio': precio, 'cantidad': 1}
     )
     
     if not created:
-        # Si ya existe, incrementa la cantidad
         producto_en_carro.cantidad += 1
         producto_en_carro.save()
     
-    return redirect('/')
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+def eliminar_del_carro(request, nombre):
+    if request.method == 'POST':
+        carro = get_object_or_404(Carro, nombre=nombre)
+        carro.delete()
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 # def agregar_al_carrito(request, producto_id):
 #     producto = get_object_or_404(Producto, codigo=producto_id)
