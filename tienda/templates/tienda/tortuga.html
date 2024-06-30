@@ -151,27 +151,28 @@
 
     <div class="container-fluid mt-5 d-flex justify-content-center">
       <div class="row g-4">
+        {% if productos %}
+        {% for x in productos%}
         <div class="col-3">
           <div class="card text-bg-light" style="width: 18rem;">
-            <img src="img/producto1.jpeg" class="card-img-top" alt="...">
+            <img src="{{ x.imagen.url }}" alt="{{ x.nombre }}" class="card-img-top productos-imagen">
             <div class="card-body">
-              <h5 class="card-title">Alimento para peces</h5>
-              <p class="card-text">El Alimento para Peces Dorados "Goldfish Flakes" marca Tetra es un alimento en escamas con fórmula BioActive para peces dorados y otros peces de agua fría.</p>
-              <a href="#" onclick="agregarAlCarrito('Alimento para peces', 3990)" class="btn btn-primary">Agregar al carro</a>
+                <h5 class="card-title">{{ x.nombre }}</h5>
+                <p class="card-text">{{ x.descripcion }}</p>
+                <p class="card-text">Precio: {{ x.precio }}</p>
+                <form method="post" action="{% url 'agregar_al_carro'%}">
+                  {% csrf_token %}
+                  <input type="hidden" name="codigo" value="{{ x.codigo }}">
+                  <input type="hidden" name="nombre" value="{{ x.nombre }}">
+                  <input type="hidden" name="precio" value="{{ x.precio }}">
+                  <button type="submit" class="btn btn-primary" onclick="actualizarListaProductos()">Agregar al carrito</button>
+              </form>
             </div>
           </div>
         </div>
-        <div class="col-3">
-          <div class="card text-bg-light" style="width: 18rem;">
-            <img src="img/comidita.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Alimento para tortugas</h5>
-              <p class="card-text">PRODAC TARTAFOOD 120g Premium Materia prima para piensos especialmente estudiada para alimentación de tortugas de agua dulce</p>
-              <a href="#" onclick="agregarAlCarrito('Alimento para tortugas', 4990)" class="btn btn-primary">Agregar al carro</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
+        {% endfor %}
+        {% endif %}
+        <!-- <div class="col-3">
           <div class="card text-bg-light" style="width: 18rem;">
             <img src="img/producto2.webp" class="card-img-top" alt="...">
             <div class="card-body">
@@ -237,7 +238,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <footer class="pie-pagina">
       <div class="grupo-1">
           <div class="box">
