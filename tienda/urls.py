@@ -10,6 +10,6 @@ urlpatterns = [
     path('agregar_al_carro/', views.agregar_al_carro, name='agregar_al_carro'),
     path('', views.index, name='index'),
     path('compra', views.compra,name='compra'),
-    path('eliminar_del_carro/<str:nombre>', views.eliminar_del_carro, name='eliminar_del_carro')
+    path('eliminar_del_carrito/<str:nombre>', views.eliminar_del_carrito, name='eliminar_del_carro')
 
 ]
