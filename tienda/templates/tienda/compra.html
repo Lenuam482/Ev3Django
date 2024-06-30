@@ -127,7 +127,7 @@
               <form action="{% url 'eliminar_del_carro' x.nombre %}">
                 {% csrf_token %}
                 <input type="hidden" name="nombre" value="{{ x.nombre }}">
-                <button type="submit" class="btn btn-primary">Eliminar Producto</button>
+                <button type="submit" class="btn btn-danger">Eliminar Producto</button>
               </form>
             </div>
           </div>

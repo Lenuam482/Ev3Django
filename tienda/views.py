@@ -74,10 +74,11 @@ def agregar_al_carro(request):
     
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
-def eliminar_del_carro(request, nombre):
-    if request.method == 'POST':
-        carro = get_object_or_404(Carro, nombre=nombre)
-        carro.delete()
+def eliminar_del_carrito(request, carrito_producto_id):
+    carrito_producto = get_object_or_404(CarritoProducto, id=carrito_producto_id)
+    
+    # Elimina el producto del carrito
+    carrito_producto.delete()
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 # def agregar_al_carrito(request, producto_id):
