@@ -106,6 +106,30 @@
   </div>
   
 
+  <div class="container-fluid mt-5 d-flex justify-content-center">
+    <div class="row g-4">
+      {% if carro %}
+      {% for x in carro%}
+      <div class="col-3">
+        <div class="card text-bg-light" style="width: 18rem;">
+          <img src="{{ x.imagen.url }}" alt="{{ x.nombre }}" class="card-img-top productos-imagen">
+          <div class="card-body">
+              <h5 class="card-title">{{ x.nombre }}</h5>
+              <p class="card-text">{{ x.descripcion }}</p>
+              <p class="card-text">Precio: {{ x.precio }}</p>
+              <form method="post" action="{% url 'agregar_al_carro'%}">
+                {% csrf_token %}
+                <input type="hidden" name="codigo" value="{{ x.codigo }}">
+                <input type="hidden" name="nombre" value="{{ x.nombre }}">
+                <input type="hidden" name="precio" value="{{ x.precio }}">
+                <button type="submit" class="btn btn-primary">Comprar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+
   <footer class="pie-pagina">
     <div class="grupo-1">
         <div class="box">
