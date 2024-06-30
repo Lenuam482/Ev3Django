@@ -9,6 +9,6 @@ urlpatterns = [
     path('mascotas', views.mascotas,name='mascotas'),
     path('agregar_al_carro/', views.agregar_al_carro, name='agregar_al_carro'),
     path('', views.index, name='index'),
-    # path('agregar_al_carrito/<str:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('compra', views.compra,name='compra'),
 
 ]

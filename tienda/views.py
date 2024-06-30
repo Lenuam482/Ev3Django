@@ -3,6 +3,14 @@ from .models import Producto, Carro
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 # Create your views here.
+
+def compra(request):
+    carro = Carro.objects.all()
+    productos = Producto.objects.all()
+    context={"productos": productos,
+             "carro" : carro}  
+    return render(request,'tienda/compra.html',context)
+
 def index(request):
     carro = Carro.objects.all()
     productos = Producto.objects.all()
