@@ -15,17 +15,4 @@ class Carro(models.Model):
     precio = models.IntegerField()
     cantidad = models.IntegerField()
 
-# class Carrito(models.Model):
-#     productos = models.ManyToManyField(Producto, through='CarritoProducto')
 
-#     def __str__(self):
-#         return f'Carrito {self.id}'
-
-
-# class CarritoProducto(models.Model):
-#     carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
-#     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-#     cantidad = models.PositiveIntegerField(default=1)
-
-#     def __str__(self):
-#         return f'{self.cantidad} x {self.producto.nombre} en el carrito {self.carrito.id}'
