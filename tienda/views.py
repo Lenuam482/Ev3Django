@@ -59,7 +59,7 @@ def mapa(request):
     return render(request,'tienda/mapa.html',context)
 
 def agregar_al_carro(request):
-    codigo = request.POST['codigo']
+
     nombre = request.POST['nombre']
     precio = request.POST['precio']
     
