@@ -13,47 +13,83 @@
     <script src="{% static 'js/script.js' %}"></script>
   </head>
   </style>
-  <body style="background-image: url('/static/img/bg.png'); background-repeat: no-repeat; background-size: 100% 100%; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+  <body style="background-image: url('/static/img/bg.png'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
     
     <nav class="navbar fixed-top" style="background-image: linear-gradient(to bottom, #0bc4d1, #077e9c);">
       <div class="container-fluid">
-          <div class="row justify-content-between" style="margin-left: 6cm;">
-              <div class="col-auto">
-                  <a class="navbar-brand" href="{% url 'index' %}" style="color: white;">
-                      <img src="{% static 'img/logo.png' %}" alt="" style="width: 50px; margin-right: 10px;">
-                      Tienda Increíble
-                  </a>
-              </div>
-              <div class="col-auto" style="margin-left: 200px;">
-                  <form class="d-flex rounded-pill" role="search" style="border-radius: 5cm; overflow: hidden;">
-                      <div class="position-relative">
-                          <input class="form-control me-2 rounded-pill" type="search" placeholder="Buscar en Tienda Increible" aria-label="Search" style="border-radius: 5m; width: 500px;">
-                          <button class="btn rounded-circle d-flex justify-content-center align-items-center position-absolute" type="submit" style="background-color: rgb(0, 140, 255); width: 34px; height: 34px; right: 0; top: 50%; transform: translateY(-50%); z-index: 1; margin-right: 10px;">
-                              <img src="{% static 'img/buscar.svg' %}" alt="" style="width: 20px; height: 20px;">
-                          </button>
-                      </div>
-                  </form>
-              </div>
-              <div class="col-auto d-flex" style="margin: auto;">
-                <li class="nav-item d-flex" style="margin-left: 200px;">
-                  <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <span>
-                      <img src="{% static 'img/user.svg' %}" alt="" style="width: 25px;">
-                    </span>
-                  </button>
-                </li>
-                <li class="nav-item d-flex">
-                  <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Toggle navigation" style="margin-left: 10px;">
-                    <span>
-                      <img src="{% static 'img/shopping-cart.svg' %}" alt="" style="width: 25px;">
-                    </span>
-                  </button>
-                </li>
-              </div>
-            </div>
+          <a class="navbar-brand" href="{% url 'index' %}" style="color: white;">
+              <img src="{% static 'img/logo.png' %}" alt="" style="width: 50px; margin-right: 10px;">
+              Tienda Increíble
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" style="color: white;"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                      <form class="d-flex rounded-pill" role="search" style="border-radius: 5cm; overflow: hidden; width: 100%;">
+                          <div class="position-relative w-100">
+                              <input class="form-control me-2 rounded-pill" type="search" placeholder="Buscar en Tienda Increíble" aria-label="Search" style="border-radius: 5m; width: 100%;">
+                              <button class="btn rounded-circle d-flex justify-content-center align-items-center position-absolute" type="submit" style="background-color: rgb(0, 140, 255); width: 34px; height: 34px; right: 10px; top: 50%; transform: translateY(-50%); z-index: 1;">
+                                  <img src="{% static 'img/buscar.svg' %}" alt="" style="width: 20px; height: 20px;">
+                              </button>
+                          </div>
+                      </form>
+                  </li>
+                  <li class="nav-item d-flex align-items-center">
+                      <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          <span>
+                              <img src="{% static 'img/user.svg' %}" alt="" style="width: 25px;">
+                          </span>
+                      </button>
+                      <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Toggle navigation" style="margin-left: 10px;">
+                          <span>
+                              <img src="{% static 'img/shopping-cart.svg' %}" alt="" style="width: 25px;">
+                          </span>
+                      </button>
+                  </li>
+              </ul>
           </div>
       </div>
-    </nav> 
+  </nav>
+  
+  
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="background-color: #0f62ce;">
+      <div class="offcanvas-header" style="color: white;">
+          <h5 class="offcanvas-title" id="offcanvasRightLabel" style="margin-top: 10px;">Carro <span id="cantidadCarro">(0)</span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body" id="offcanvasBody" style="color: white;">
+          <hr>
+          <div id="listaProductos">
+            <div class="d-flex justify-content-between align-items-center">             
+          </div>
+          </div>
+          {% if carro %}           
+            {% for x in carro %}
+              <p style="display: block;">{{x.nombre}} - $ {{x.precio}} CLP (Cantidad: {{x.cantidad}})</p>
+            {% endfor %}
+            <a href="{% url 'compra' %}" type="button" class="btn rounded-pill btn-outline-light" style="background-color: #03a3ff; font-weight: bold; color: white; margin-top: 5px;">
+              Comprar
+          </a>
+          {% else %}
+            <div id="mensajeCarrito" style="display: none;">
+              <div class="container d-flex justify-content-center align-items-center" style="margin-top: 2cm;">
+                  <img src="{% static 'img/carrito.png' %}" alt="">
+              </div>
+              <p style="font-weight: bold; margin-top: 5px; text-align: center;">Agrega algo a tu carrito</p>
+              <p style="font-size: 15px; text-align: center;">Llévate algo o iremos por ti</p>
+              <div class="container text-center" style="margin-top: 2px;">
+                  <button type="button" class="btn rounded-pill btn-outline-light" data-bs-dismiss="offcanvas" aria-label="Close" style="background-color: #03a3ff; font-weight: bold; color: white; margin-top: 5px;">
+                      Buscar
+                  </button>
+              </div>
+            </div>
+            <div id="totalPrecio" style="text-align: center; font-weight: bold; margin-top: 10px;">Total: $0</div>
+          {% endif %}
+      </div>
+    </div>
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="background-color: #0f62ce;">
       <div class="offcanvas-header" style="color: white;">
@@ -80,29 +116,32 @@
     </div>
 
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content" style="background-color: #29529e;">
-        <div class="modal-header" style="color: white;">
-          <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="registroForm" class="d-flex was-validated" novalidate style="overflow: hidden; display: block;">
-            <div class="position-relative has-validation">
-                <input id="usuario" name="usuario" class="form-control me-2 rounded-pill" type="text" placeholder="Usuario" required="" style="border-radius: 5m; width: 450px;"><br><hr>
-                <input id="contraseña" name="contraseña" class="form-control me-2 rounded-pill" type="password" placeholder="Contraseña" required="" style="border-radius: 5m; width: 450px;"><br><hr>
-                <input id="verificarcontra" name="verificarcontra" class="form-control me-2 rounded-pill" type="password" placeholder="Verificar contraseña" required style="border-radius: 5m; width: 450px;"><br>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                  <button type="submit" class="btn btn-outline-light">Registrarse</button>
-                </div>
-            </div>
-          </form>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content" style="background-color: #29529e;">
+              <div class="modal-header" style="color: white;">
+                  <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form id="registroForm" class="was-validated" novalidate>
+                      <div class="mb-3">
+                          <input id="usuario" name="usuario" class="form-control rounded-pill" type="text" placeholder="Usuario" required>
+                      </div>
+                      <div class="mb-3">
+                          <input id="contraseña" name="contraseña" class="form-control rounded-pill" type="password" placeholder="Contraseña" required>
+                      </div>
+                      <div class="mb-3">
+                          <input id="verificarcontra" name="verificarcontra" class="form-control rounded-pill" type="password" placeholder="Verificar contraseña" required>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                          <button type="submit" class="btn btn-outline-light">Registrarse</button>
+                      </div>
+                  </form>
+              </div>
           </div>
-        </div>
       </div>
-    </div>
   </div>
   
 

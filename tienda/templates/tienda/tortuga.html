@@ -12,52 +12,47 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
   </head>
-  <body style="background-image: url('/static/img/bg.png'); background-repeat: no-repeat; background-size: 100% 100%; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+  <body style="background-image: url('/static/img/bg.png'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
     
     <nav class="navbar fixed-top" style="background-image: linear-gradient(to bottom, #0bc4d1, #077e9c);">
       <div class="container-fluid">
-          <div class="row justify-content-between" style="margin-left: 6cm;">
-              <div class="col-auto">
-                  <a class="navbar-brand" href="{% url 'index' %}" style="color: white;">
-                      <img src="{% static 'img/logo.png' %}" alt="" style="width: 50px; margin-right: 10px;">
-                      Tienda Increíble
-                  </a>
-              </div>
-              <div class="col-auto">
-                <a class="navbar-brand d-flex" href="{% url 'mascotas' %}" style="color: white;">
-                 Mascotas
-              </a>
-              </div>
-              <div class="col-auto" style="margin-left: 200px;">
-                  <form class="d-flex rounded-pill" role="search" style="border-radius: 5cm; overflow: hidden;">
-                      <div class="position-relative">
-                          <input class="form-control me-2 rounded-pill" type="search" placeholder="Buscar en Tienda Increible" aria-label="Search" style="border-radius: 5m; width: 500px;">
-                          <button class="btn rounded-circle d-flex justify-content-center align-items-center position-absolute" type="submit" style="background-color: rgb(0, 140, 255); width: 34px; height: 34px; right: 0; top: 50%; transform: translateY(-50%); z-index: 1; margin-right: 10px;">
-                              <img src="{% static 'img/buscar.svg' %}" alt="" style="width: 20px; height: 20px;">
-                          </button>
-                      </div>
-                  </form>
-              </div>
-              <div class="col-auto d-flex" style="margin: auto;">
-                <li class="nav-item d-flex" style="margin-left: 200px;">
-                  <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <span>
-                      <img src="{% static 'img/user.svg' %}" alt="" style="width: 25px;">
-                    </span>
-                  </button>
-                </li>
-                <li class="nav-item d-flex">
-                  <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Toggle navigation" style="margin-left: 10px;">
-                    <span>
-                      <img src="{% static 'img/shopping-cart.svg' %}" alt="" style="width: 25px;">
-                    </span>
-                  </button>
-                </li>
-              </div>
-            </div>
+          <a class="navbar-brand" href="{% url 'index' %}" style="color: white;">
+              <img src="{% static 'img/logo.png' %}" alt="" style="width: 50px; margin-right: 10px;">
+              Tienda Increíble
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" style="color: white;"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                      <form class="d-flex rounded-pill" role="search" style="border-radius: 5cm; overflow: hidden; width: 100%;">
+                          <div class="position-relative w-100">
+                              <input class="form-control me-2 rounded-pill" type="search" placeholder="Buscar en Tienda Increíble" aria-label="Search" style="border-radius: 5m; width: 100%;">
+                              <button class="btn rounded-circle d-flex justify-content-center align-items-center position-absolute" type="submit" style="background-color: rgb(0, 140, 255); width: 34px; height: 34px; right: 10px; top: 50%; transform: translateY(-50%); z-index: 1;">
+                                  <img src="{% static 'img/buscar.svg' %}" alt="" style="width: 20px; height: 20px;">
+                              </button>
+                          </div>
+                      </form>
+                  </li>
+                  <li class="nav-item d-flex align-items-center">
+                      <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          <span>
+                              <img src="{% static 'img/user.svg' %}" alt="" style="width: 25px;">
+                          </span>
+                      </button>
+                      <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Toggle navigation" style="margin-left: 10px;">
+                          <span>
+                              <img src="{% static 'img/shopping-cart.svg' %}" alt="" style="width: 25px;">
+                          </span>
+                      </button>
+                  </li>
+              </ul>
           </div>
       </div>
-    </nav> 
+  </nav>
+  
+  
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="background-color: #0f62ce;">
       <div class="offcanvas-header" style="color: white;">
@@ -70,7 +65,7 @@
             <div class="d-flex justify-content-between align-items-center">             
           </div>
           </div>
-          {% if carro %}
+          {% if carro %}           
             {% for x in carro %}
               <p style="display: block;">{{x.nombre}} - $ {{x.precio}} CLP (Cantidad: {{x.cantidad}})</p>
             {% endfor %}
@@ -94,31 +89,34 @@
           {% endif %}
       </div>
     </div>
-
+    
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background-color: #29529e;">
-          <div class="modal-header" style="color: white;">
-            <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form id="registroForm" class="d-flex was-validated" novalidate style="overflow: hidden; display: block;">
-              <div class="position-relative has-validation">
-                  <input id="usuario" name="usuario" class="form-control me-2 rounded-pill" type="text" placeholder="Usuario" required="" style="border-radius: 5m; width: 450px;"><br><hr>
-                  <input id="contraseña" name="contraseña" class="form-control me-2 rounded-pill" type="password" placeholder="Contraseña" required="" style="border-radius: 5m; width: 450px;"><br><hr>
-                  <input id="verificarcontra" name="verificarcontra" class="form-control me-2 rounded-pill" type="password" placeholder="Verificar contraseña" required style="border-radius: 5m; width: 450px;"><br>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-outline-light">Registrarse</button>
-                  </div>
+          <div class="modal-content" style="background-color: #29529e;">
+              <div class="modal-header" style="color: white;">
+                  <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-            </form>
-            </div>
+              <div class="modal-body">
+                  <form id="registroForm" class="was-validated" novalidate>
+                      <div class="mb-3">
+                          <input id="usuario" name="usuario" class="form-control rounded-pill" type="text" placeholder="Usuario" required>
+                      </div>
+                      <div class="mb-3">
+                          <input id="contraseña" name="contraseña" class="form-control rounded-pill" type="password" placeholder="Contraseña" required>
+                      </div>
+                      <div class="mb-3">
+                          <input id="verificarcontra" name="verificarcontra" class="form-control rounded-pill" type="password" placeholder="Verificar contraseña" required>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                          <button type="submit" class="btn btn-outline-light">Registrarse</button>
+                      </div>
+                  </form>
+              </div>
           </div>
-        </div>
       </div>
-    </div>
+  </div>
 
     <div class="container-fluid d-flex justify-content-center" style="max-width: 700px;">
         <div class="card text-bg-light border-primary align-items-center border-light" style="max-width: 600px; margin: auto; margin-top: 200px;">
@@ -161,95 +159,31 @@
     </div>
 
     <div class="container-fluid mt-5 d-flex justify-content-center">
-      <div class="row g-4">
-        {% if productos %}
-        {% for x in productos%}
-        <div class="col-3">
-          <div class="card text-bg-light" style="width: 18rem;">
-            <img src="{{ x.imagen.url }}" alt="{{ x.nombre }}" class="card-img-top productos-imagen">
-            <div class="card-body">
-                <h5 class="card-title">{{ x.nombre }}</h5>
-                <p class="card-text">{{ x.descripcion }}</p>
-                <p class="card-text">Precio: {{ x.precio }}</p>
-                <form method="post" action="{% url 'agregar_al_carro'%}">
-                  {% csrf_token %}
-                  <input type="hidden" name="codigo" value="{{ x.codigo }}">
-                  <input type="hidden" name="nombre" value="{{ x.nombre }}">
-                  <input type="hidden" name="precio" value="{{ x.precio }}">
-                  <button type="submit" class="btn btn-primary" onclick="actualizarListaProductos()">Agregar al carrito</button>
-              </form>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-        {% endif %}
-        <!-- <div class="col-3">
-          <div class="card text-bg-light" style="width: 18rem;">
-            <img src="img/producto2.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Dispensador de comida</h5>
-              <p class="card-text">Alimentador de calidad de 14 onzas: fabricado con calidad, el tamaño del recipiente es de 14 onzas, puede cargar días de comida para tus mascotas de acuario, con alimentación automática.</p>
-              <a href="#" onclick="agregarAlCarrito('Dispensador de comida', 9990)" class="btn btn-primary">Agregar al carro</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card text-bg-light" style="width: 18rem;">
-            <img src="img/producto3.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Casa para pecera</h5>
-              <p class="card-text">Productos para peceras inspirados en la serie bob esponja</p>
-              <a href="#" onclick="agregarAlCarrito('Casa para pecera', 6690)" class="btn btn-primary">Agregar al carro</a>
-            </div>
-          </div>
-        </div>
+      <div class="row ">
+          {% if productos %}
+              {% for x in productos%}
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                      <div class="card text-bg-light" style="width: 18rem;">
+                          <img src="{{ x.imagen.url }}" alt="{{ x.nombre }}" class="card-img-top productos-imagen">
+                          <div class="card-body">
+                              <h5 class="card-title">{{ x.nombre }}</h5>
+                              <p class="card-text">{{ x.descripcion }}</p>
+                              <p class="card-text">Precio: {{ x.precio }}</p>
+                              <form method="post" action="{% url 'agregar_al_carro'%}">
+                                  {% csrf_token %}
+                                  <input type="hidden" name="codigo" value="{{ x.codigo }}">
+                                  <input type="hidden" name="nombre" value="{{ x.nombre }}">
+                                  <input type="hidden" name="precio" value="{{ x.precio }}">
+                                  <button type="submit" class="btn btn-primary" onclick="actualizarListaProductos()">Agregar al carrito</button>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              {% endfor %}
+          {% endif %}
       </div>
     </div>
-  
-    <div class="container-fluid mt-5 d-flex justify-content-center">
-      <div class="row g-4">
-        <div class="col-3">
-          <div class="card text-bg-light" style="width: 18rem;">
-            <img src="img/producto4.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Desinfectante-prevencion de enfermedades</h5>
-              <p class="card-text">Para la desinfección completa del acuario contra el crecimiento de bacterias y hongos en las paredes y adornos de su acuario.</p>
-              <a href="#" onclick="agregarAlCarrito('Desinfectante-prevencion de enfermedades', 12990)" class="btn btn-primary">Agregar al carro</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card text-bg-light" style="width: 18rem;">
-            <img src="img/producto5.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Acondicionador-Anticloro Fritz</h5>
-              <p class="card-text">Fritz Complete es un verdadero acondicionador de agua todo en uno y controla el ciclo del nitrógeno.</p>
-              <a href="#" onclick="agregarAlCarrito('Acondicionador-Anticloro Fritz', 7990)" class="btn btn-primary">Agregar al carro</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card text-bg-light" style="width: 18rem;">
-            <img src="img/producto6.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Termocalefactor Aquael Platinium 50w</h5>
-              <p class="card-text">un innovador termocalefactor de vidrio de la empresa AQUAEL equipado con un preciso termostato electrónico.</p>
-              <a href="#" onclick="agregarAlCarrito('Termocalefactor Aquael Platinium 50w', 17990)" class="btn btn-primary">Agregar al carro</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card text-bg-light" style="width: 18rem;">
-            <img src="img/producto7.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Caja roca base - Nature ocean</h5>
-              <p class="card-text">Roca base premium para acuarios marinos, de ciclidos africanos y otros peces de aguas duras.</p>
-              <a href="#" onclick="agregarAlCarrito('Caja roca base - Nature ocean', 4500)" class="btn btn-primary">Agregar al carro</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+
     <footer class="pie-pagina">
       <div class="grupo-1">
           <div class="box">

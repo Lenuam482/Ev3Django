@@ -4,6 +4,13 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 # Create your views here.
 
+def ad_productos(request):
+    carro = Carro.objects.all()
+    productos = Producto.objects.all()
+    context={"productos": productos,
+             "carro" : carro}   
+    return render(request,'tienda/ad_productos.html',context)
+
 def compra(request):
     carro = Carro.objects.all()
     productos = Producto.objects.all()
@@ -14,18 +21,13 @@ def compra(request):
 def index(request):
     carro = Carro.objects.all()
     productos = Producto.objects.all()
-    # carrito = Carrito.objects.all()
-    # carritoProducto = CarritoProducto.objects.all()
-    context={ #"carritoProducto" : carritoProducto,
-             "productos": productos,
-             "carro" : carro}
-             #"carrito" : carrito}   
+    context={"productos": productos,
+             "carro" : carro}   
     return render(request,'tienda/index.html',context)
 
 def darwin(request):
     carro = Carro.objects.all()
     productos = Producto.objects.all()
-    #carrito = Carrito.objects.all()
     context={
              "productos": productos,
              "carro" : carro}
@@ -34,7 +36,6 @@ def darwin(request):
 def mascotas(request):
     carro = Carro.objects.all()
     productos = Producto.objects.all()
-    #carrito = Carrito.objects.all()
     context={
              "productos": productos,
              "carro" : carro}
@@ -43,7 +44,6 @@ def mascotas(request):
 def tortuga(request):
     carro = Carro.objects.all()
     productos = Producto.objects.all()
-    #carrito = Carrito.objects.all()
     context={
              "productos": productos,
              "carro" : carro}
@@ -52,7 +52,6 @@ def tortuga(request):
 def mapa(request):
     carro = Carro.objects.all()
     productos = Producto.objects.all()
-    #carrito = Carrito.objects.all()
     context={
              "productos": productos,
              "carro" : carro}
@@ -79,25 +78,3 @@ def eliminar_del_carro(request, nombre):
         carro = get_object_or_404(Carro, nombre=nombre)
         carro.delete()
     return redirect(request.META.get('HTTP_REFERER', '/'))
-
-# def agregar_al_carrito(request, producto_id):
-#     producto = get_object_or_404(Producto, codigo=producto_id)
-
-#     # Obtén el carrito de la sesión o crea uno nuevo si no existe
-#     carrito_id = request.session.get('carrito_id')
-#     if carrito_id:
-#         try:
-#             carrito = Carrito.objects.get(id=carrito_id)
-#         except Carrito.DoesNotExist:
-#             carrito = Carrito.objects.create()
-#             request.session['carrito_id'] = carrito.id
-#     else:
-#         carrito = Carrito.objects.create()
-#         request.session['carrito_id'] = carrito.id
-
-#     carrito_producto, created = CarritoProducto.objects.get_or_create(carrito=carrito, producto=producto)
-#     if not created:
-#         carrito_producto.cantidad += 1
-#         carrito_producto.save()
-
-#     return redirect('index')  # Redirige a la vista principal o a donde desees
