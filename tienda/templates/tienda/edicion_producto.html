@@ -49,14 +49,14 @@
     
     <div style=" text-align: center; margin-top: 100px;">
         {% if productos %}
-            <h2>Formulario Actualizar Producot</h2>
+            <h2>Formulario Actualizar Producto</h2>
 
-            <form action="{% url 'productoupdate' %}" method="POST" enctype="multipart/form-data">
+            <form action="{% url 'productoupdate' productos.codigo%}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <pre>Nombre:        <input type="text" name="nombre" value="{{productos.nombre}}"></pre>
                 <pre>Descripción:   <input type="text" name="descripcion" value="{{productos.descripcion}}"></pre>
-                <pre>Precio:        <input type="text" name="precio" value="{{productos.precio}}"></pre>
+                <pre>Precio:        <input type="number" name="precio" value="{{productos.precio}}"></pre>
                 <pre>Imagen actual: <img src="{{ productos.imagen.url }}" alt="{{ productos.nombre }}" style="max-width: 100px; max-height: 100px;"></pre>
                 <pre>Imagen nueva:  <input type="file" name="imagen"></pre>
                 <input type="submit" name="opcion" value="Actualizar">

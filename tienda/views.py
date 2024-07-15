@@ -92,12 +92,6 @@ def eliminar_producto(request,pk):
         context = {'productos':productos, 'mensaje':mensaje}
         return render(request, 'tienda/listar_producto.html', context)
 
-# def eliminar_producto(request,codigo):
-#     if request.method == 'POST':
-#         producto = get_object_or_404(Producto, codigo=codigo)
-#         producto.delete()
-#     return redirect(request.META.get('HTTP_REFERER', '/'))
-
 def ad_productos(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST, request.FILES)
@@ -110,47 +104,45 @@ def ad_productos(request):
 
 def edicion_producto(request, pk):
     if pk != "":
-        producto=Producto.objects.get(codigo=pk)
-        context={"productos": producto}
+        productos=Producto.objects.get(codigo=pk)
+        context={"productos": productos}
 
-        if producto:
+        if productos:
             return render(request, 'tienda/edicion_producto.html', context)
         else:
             context={'mensaje':"Error, nombre producto no existe"}
             return render(request, 'tienda/edicion_producto.html', context)
         
-def productoupdate(request):
-    if request.method == "POST":
+def productoupdate(request, codigo):
+    try:
+
         nombre=request.POST["nombre"]
         precio=request.POST["precio"]
         descripcion=request.POST["descripcion"]
         
 
-        producto = Producto()
-        producto.nombre=nombre
-        producto.precio=precio
-        producto.descripcion=descripcion
+        productos = Producto.objects.get(codigo = codigo)
         
-        if 'imagen' in request.FILES:
-                producto.imagen = request.FILES['imagen']
-                
-        producto.save
-        context={'mensaje':"Ok, producto actualizado",'productos': producto}
-        return render(request, 'tienda/listar_producto.html', context)
-    else:
-        producto = Producto.objects.all()
-        context = {'productos': producto}
-        return render(request, 'tienda/listar_producto.html', context)
+        
+        try:
+            imagen = request.FILES['imagen']
+            ruta_foto = "media/"+str(productos.imagen)
+            import os 
+            if ruta_foto != "media/productos/noimagen.jpg":
+                os.remove(ruta_foto)
+        except:
+            imagen = productos.imagen
 
-# def edicion_producto(request, nombre):
-#     producto = get_object_or_404(Producto, nombre=nombre)
-    
-#     if request.method == 'POST':
-#         form = ProductoForm(request.POST, request.FILES, instance=producto)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('listar_producto')  
-#     else:
-#         form = ProductoForm(instance=producto)
-    
-#     return render(request, 'edicion_producto.html', {'form': form, 'producto': producto})
+        productos.nombre=nombre
+        productos.precio=precio
+        productos.descripcion=descripcion
+        productos.imagen=imagen
+                
+        productos.save
+        productos = Producto.objects.all().values()
+        context={'mensaje':"Ok, producto actualizado",'productos': productos}
+        return render(request, 'tienda/listar_producto.html', context)
+    except:
+        productos = Producto.objects.all().values()
+        context={'mensaje':"Error al actualizar producto",'productos': productos}
+        return render(request, 'tienda/listar_producto.html', context)

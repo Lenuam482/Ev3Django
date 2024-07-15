@@ -25,23 +25,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <form class="d-flex rounded-pill" role="search" style="border-radius: 5cm; overflow: hidden;">
-                            <div class="position-relative">
-                                <input class="form-control me-2 rounded-pill" type="search" placeholder="Buscar en Tienda Increíble" aria-label="Search" style="border-radius: 5m; width: 100%; max-width: 500px;">
-                                <button class="btn rounded-circle d-flex justify-content-center align-items-center position-absolute" type="submit" style="background-color: rgb(0, 140, 255); width: 34px; height: 34px; right: 0; top: 50%; transform: translateY(-50%); z-index: 1; margin-right: 10px;">
+                        <form class="d-flex rounded-pill" role="search" style="border-radius: 5cm; overflow: hidden; width: 100%;">
+                            <div class="position-relative w-100">
+                                <input class="form-control me-2 rounded-pill" type="search" placeholder="Buscar en Tienda Increíble" aria-label="Search" style="border-radius: 5m; width: 100%;">
+                                <button class="btn rounded-circle d-flex justify-content-center align-items-center position-absolute" type="submit" style="background-color: rgb(0, 140, 255); width: 34px; height: 34px; right: 10px; top: 50%; transform: translateY(-50%); z-index: 1;">
                                     <img src="{% static 'img/buscar.svg' %}" alt="" style="width: 20px; height: 20px;">
                                 </button>
                             </div>
                         </form>
                     </li>
-                    <li class="nav-item d-flex">
+                    <li class="nav-item d-flex align-items-center">
                         <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <span>
                                 <img src="{% static 'img/user.svg' %}" alt="" style="width: 25px;">
                             </span>
                         </button>
-                    </li>
-                    <li class="nav-item d-flex">
                         <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Toggle navigation" style="margin-left: 10px;">
                             <span>
                                 <img src="{% static 'img/shopping-cart.svg' %}" alt="" style="width: 25px;">
@@ -83,8 +81,9 @@
     </div>
    
     <br>
-    
-    <h1>Agrgar Nuevo Producto</h1>
+
+    <div style=" text-align: center; margin-top: 100px;">
+    <h1>Agregar Nuevo Producto</h1>
 
     {% if form.errors %}
         <p>Error en el formulario. Por favor, corrige los siguientes errores:</p>
@@ -109,31 +108,9 @@
         <button type="submit">Guardar Producto</button>
     </form>
 
-    <div class="container-fluid mt-5 d-flex justify-content-center">
-        <div class="row ">
-            {% if productos %}
-                {% for x in productos%}
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <div class="card text-bg-light" style="width: 18rem;">
-                            <img src="{{ x.imagen.url }}" alt="{{ x.nombre }}" class="card-img-top productos-imagen">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ x.nombre }}</h5>
-                                <p class="card-text">{{ x.descripcion }}</p>
-                                <p class="card-text">Precio: {{ x.precio }}</p>
-                                <form method="post" action="{% url 'agregar_al_carro'%}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="codigo" value="{{ x.codigo }}">
-                                    <input type="hidden" name="nombre" value="{{ x.nombre }}">
-                                    <input type="hidden" name="precio" value="{{ x.precio }}">
-                                    <button type="submit" class="btn btn-primary" onclick="actualizarListaProductos()">Agregar al carrito</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-      </div>
+    <a href="{% url 'listar_producto' %}">volver</a>
+
+    </div>
 
 
     <footer class="pie-pagina">
