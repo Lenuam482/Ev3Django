@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Increíble | Elmore</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="website icon" type="png" href="{% static 'img/logo.png' %}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body style="background-image: url('/static/img/bg.png'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    <nav class="navbar fixed-top" style="background-image: linear-gradient(to bottom, #0bc4d1, #077e9c); margin-bottom: 2rem;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index' %}" style="color: white;">
+                <img src="{% static 'img/logo.png' %}" alt="" style="width: 50px; margin-right: 10px;">
+                Tienda Increíble
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="color: white;"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <form class="d-flex rounded-pill" role="search" style="border-radius: 5cm; overflow: hidden; width: 100%;">
+                            <div class="position-relative w-100">
+                                <input class="form-control me-2 rounded-pill" type="search" placeholder="Buscar en Tienda Increíble" aria-label="Search" style="border-radius: 5m; width: 100%;">
+                                <button class="btn rounded-circle d-flex justify-content-center align-items-center position-absolute" type="submit" style="background-color: rgb(0, 140, 255); width: 34px; height: 34px; right: 10px; top: 50%; transform: translateY(-50%); z-index: 1;">
+                                    <img src="{% static 'img/buscar.svg' %}" alt="" style="width: 20px; height: 20px;">
+                                </button>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <span>
+                                <img src="{% static 'img/user.svg' %}" alt="" style="width: 25px;">
+                            </span>
+                        </button>         
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div style=" text-align: center; margin-top: 100px;">
+        {% if productos %}
+            <h2>Formulario Actualizar Producot</h2>
+
+            <form action="{% url 'productoupdate' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <pre>Nombre:        <input type="text" name="nombre" value="{{productos.nombre}}"></pre>
+                <pre>Descripción:   <input type="text" name="descripcion" value="{{productos.descripcion}}"></pre>
+                <pre>Precio:        <input type="text" name="precio" value="{{productos.precio}}"></pre>
+                <pre>Imagen actual: <img src="{{ productos.imagen.url }}" alt="{{ productos.nombre }}" style="max-width: 100px; max-height: 100px;"></pre>
+                <pre>Imagen nueva:  <input type="file" name="imagen"></pre>
+                <input type="submit" name="opcion" value="Actualizar">
+
+            </form><br><br>
+        {% endif %}
+        <div id="idMensaje">
+            {% if mensaje %}
+            {{mensaje}}
+            {% endif %}
+        </div>
+        <br><br>
+        <a href="{% url 'listar_producto' %}">Volver</a>
+    </div>
+    
+    
+
+
+    <footer class="pie-pagina">
+        <div class="grupo-1">
+            <div class="box">
+                <figure>
+                    <a href="#">
+                        <img src="{% static 'img/logo.png' %}" alt="Logo de Tienda Increible" style="width: auto;">
+                    </a>
+                </figure>
+            </div>
+            <div class="box">
+                <h2>SOBRE NOSOTROS</h2>
+                <p>Nuestro objetivo es hacer que las mascotas más especiales sean bien cuidadas.</p>
+                <p>Con nuestros productos podrás cuidar de manera más eficiente a tu mascota que tanto amas.</p>
+            </div>
+            <div class="box">
+                <h2>SIGUENOS</h2>
+                <div class="red-social">
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-youtube"></a>
+                </div>
+            </div>
+        </div>
+        <div class="grupo-2">
+            <small>&copy; 2024 <b>Tienda Increible</b> - Todos los Derechos Reservados.</small>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

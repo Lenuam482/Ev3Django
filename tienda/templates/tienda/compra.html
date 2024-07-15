@@ -145,15 +145,17 @@
   </div>
   
 
-  <div class="container-fluid mt-5 d-flex justify-content-center">
-    <div class="row g-4">
-        <h1>Tu carrito</h1>
+  <div class="container-fluid mt-5 pt-5">
+    <div class="row g-4 justify-content-center">
         {% if carro %}
+        <div class="col-12 text-center">
+            <h1>Tu carrito</h1>
+        </div>
             {% for x in carro %}
-                <div class="col-3">
-                    <div class="card text-bg-light" style="width: 18rem;">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card text-bg-light h-100">
                         <div class="card-body">
-                            <h5 class="card-title">{{ x.nombre }}</h5>               
+                            <h5 class="card-title">{{ x.nombre }}</h5>
                             <p class="card-text">Precio: {{ x.precio }}</p>
                             <p class="card-text">Cantidad: {{ x.cantidad }}</p>
                             <form method="post" action="{% url 'agregar_al_carro' %}">
@@ -161,21 +163,24 @@
                                 <input type="hidden" name="codigo" value="{{ x.codigo }}">
                                 <input type="hidden" name="nombre" value="{{ x.nombre }}">
                                 <input type="hidden" name="precio" value="{{ x.precio }}">
-                                <button type="submit" class="btn btn-primary">Aumentar Cantidad</button>              
-                            </form>     
+                                <button type="submit" class="btn btn-primary">Aumentar Cantidad</button>
+                            </form>
                             <form method="post" action="{% url 'eliminar_del_carro' x.nombre %}">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Eliminar Producto</button>
+                                <button type="submit" class="btn btn-danger mt-2">Eliminar Producto</button>
                             </form>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         {% else %}
-            <p>Tu carro está vacío.</p>
+            <div class="col-12 text-center">
+                <h1>Tu carro está vacío.</h1>
+            </div>
         {% endif %}
     </div>
 </div>
+
 
   <footer class="pie-pagina">
     <div class="grupo-1">
