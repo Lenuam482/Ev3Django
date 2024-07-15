@@ -12,9 +12,9 @@ urlpatterns = [
     path('compra', views.compra,name='compra'),
     path('eliminar_del_carro/<str:nombre>', views.eliminar_del_carro, name='eliminar_del_carro'),
     path('ad_productos/', views.ad_productos, name='ad_productos'),
-    path('eliminar_producto/<str:nombre>/', views.eliminar_producto, name='eliminar_producto'),
+    path('eliminar_producto/<int:pk>/', views.eliminar_producto, name='eliminar_producto'),
     path('listar_producto', views.listar_producto, name='listar_producto'),
-    path('edicion_producto/<str:pk>/', views.edicion_producto, name='edicion_producto'),
+    path('edicion_producto/<int:pk>/', views.edicion_producto, name='edicion_producto'),
     path('productoupdate', views.productoupdate, name='productoupdate')
 
 ]

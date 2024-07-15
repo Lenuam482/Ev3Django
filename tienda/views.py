@@ -77,11 +77,26 @@ def eliminar_del_carro(request, nombre):
         carro.delete()
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
-def eliminar_producto(request,nombre):
-    if request.method == 'POST':
-        producto = get_object_or_404(Producto, nombre=nombre)
+def eliminar_producto(request,pk):
+    context={}
+    try:
+        producto=Producto.objects.get(codigo=pk)
         producto.delete()
-    return redirect(request.META.get('HTTP_REFERER', '/'))
+        mensaje="Producto Eliminado"
+        productos = Producto.objects.all()
+        context = {'productos':productos, 'mensaje':mensaje}
+        return render(request, 'tienda/listar_producto.html', context)
+    except:
+        mensaje="Error, producto no existe"
+        productos = Producto.objects.all()
+        context = {'productos':productos, 'mensaje':mensaje}
+        return render(request, 'tienda/listar_producto.html', context)
+
+# def eliminar_producto(request,codigo):
+#     if request.method == 'POST':
+#         producto = get_object_or_404(Producto, codigo=codigo)
+#         producto.delete()
+#     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 def ad_productos(request):
     if request.method == 'POST':
@@ -95,7 +110,7 @@ def ad_productos(request):
 
 def edicion_producto(request, pk):
     if pk != "":
-        producto=Producto.objects.get(nombre=pk)
+        producto=Producto.objects.get(codigo=pk)
         context={"productos": producto}
 
         if producto:
